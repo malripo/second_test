@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+{% load static %}
+<div class="feed_box" style="padding:5px 15px">
+    <div class="feed_name" style="padding:15px;display:flex;justify-content:space-between;align-items:center">
+      <div style="display:flex; align-items:center;">
+        <div class="profile_box">
+          <img class="profile_img"
+               src="{% get_media_prefix %}{{ user.profile_image }}">
+        </div>
+        <div class="name_content" style="display: flex; flex-direction: column;">
+          <span class="feed_name_txt">{{ user.nickname }} </span>
+          <span class="name_content_txt" style="font-size: 15px;padding: 0px 10px;font-weight: bold;color: lightgray;overflow: hidden;
+                text-overflow: ellipsis;white-space: nowrap;width: 190px;"> {{ user.name }}</span>
+        </div>
+      </div>
+      <div>
+        <a class="link_txt" style="text-decoration:none;">전환</a>
+      </div>
+    </div>
+    <div class="recommend_box" style="padding:15px;display:flex;justify-content:space-between;">
+      <span style="color: gray"> 회원님을 위한 추천</span>
+      <span>
+          <a href="#" style="font-weight: bold; color: black; text-decoration:none">모두 보기</a>
+      </span>
+    </div>
+    <div>
+      <div class="feed_name" style="padding:15px;display:flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <div class="profile_box">
+              <img class="profile_img"
+                   src="https://i.pinimg.com/736x/93/a6/8b/93a68b57a54e4bdc73d43d1d049b94b3.jpg">
+            </div>
+            <div class="name_content" style="display: flex; flex-direction: column;">
+              <span class="feed_name_txt"> dation3388 </span>
+              <span class="name_content_txt" style="font-size: 15px;padding: 0px 10px;font-weight: bold;color: lightgray;overflow: hidden;
+                text-overflow: ellipsis;white-space: nowrap;width: 190px;">그냥 신규가입</span>
+            </div>
+        </div>
+        <div>
+            <a class="link_txt" style="text-decoration: none;">팔로우</a>
+        </div>
+      </div>
+      <div class="feed_name" style="padding:15px;display:flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <div class="profile_box">
+              <img class="profile_img"
+                   src="http://file3.instiz.net/data/cached_img/upload/2021/01/27/18/2ce2f41f7e9f09c0acc77faac7452dbf.jpg">
+            </div>
+            <div class="name_content" style="display: flex; flex-direction: column;">
+              <span class="feed_name_txt"> gaoudi </span>
+              <span class="name_content_txt" style="font-size: 15px;padding: 0px 10px;font-weight: bold;color: lightgray;overflow: hidden;
+                text-overflow: ellipsis;white-space: nowrap;width: 190px;"> IU 외 5명이 팔로우</span>
+            </div>
+        </div>
+        <div>
+            <a class="link_txt" style="text-decoration: none;">팔로우</a>
+        </div>
+      </div>
+      <div class="feed_name" style="padding:15px;display:flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <div class="profile_box">
+              <img class="profile_img"
+                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTiCVWdogd6Ocsm08kL8ph4sb1MN0AYEiSUQ&usqp=CAU">
+            </div>
+            <div class="name_content" style="display: flex; flex-direction: column;">
+              <span class="feed_name_txt"> CAU </span>
+              <span class="name_content_txt" style="font-size: 15px;padding: 0px 10px;font-weight: bold;color: lightgray;overflow: hidden;
+                text-overflow: ellipsis;white-space: nowrap;width: 190px;"> IU 외 5명이 팔로우</span>
+            </div>
+        </div>
+        <div>
+            <a class="link_txt" style="text-decoration: none;">팔로우</a>
+        </div>
+      </div>
+      <div class="feed_name" style="padding:15px;display:flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <div class="profile_box">
+              <img class="profile_img"
+                   src="https://pbs.twimg.com/media/EhzH0_DU4AEZ9yr.jpg">
+            </div>
+            <div class="name_content" style="display: flex; flex-direction: column;">
+              <span class="feed_name_txt"> 123456789 </span>
+              <span class="name_content_txt" style="font-size: 15px;padding: 0px 10px;font-weight: bold;color: lightgray;overflow: hidden;
+                text-overflow: ellipsis;white-space: nowrap;width: 190px;"> 그냥 추천해봄 </span>
+            </div>
+        </div>
+        <div>
+            <a class="link_txt" style="text-decoration: none;">팔로우</a>
+        </div>
+      </div>
+      <div class="feed_name" style="padding:15px;display:flex; flex-direction: row; justify-content: space-between;">
+        <div style="display: flex; align-items: center;">
+            <div class="profile_box">
+              <img class="profile_img"
+                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHPNYM5RQgA2F7BtpBQ-OrNFKDXVDUpypRuw&usqp=CAU">
+            </div>
+            <div class="name_content" style="display: flex; flex-direction: column;">
+              <span class="feed_name_txt"> instiz </span>
+              <span class="name_content_txt" style="font-size: 15px;padding: 0px 10px;font-weight: bold;color: lightgray;overflow: hidden;
+                text-overflow: ellipsis;white-space: nowrap;width: 190px;"> 애도 유명해 </span>
+            </div>
+        </div>
+        <div>
+            <a class="link_txt" style="text-decoration: none;">팔로우</a>
+        </div>
+      </div>
+    </div>
+    <div class="comment_box" style="margin: 40px 0 0 5px;
+        font-size: 12px;
+        font-weight: bold;
+        color: lightgray;
+        display: flex;
+        flex-direction: column; align-items: start;">
+      <span> 인스타그램 클론 코딩 </span>
+      <span> https://cholol.tistory.com </span>
+        <br>
+      <span> @2021 Jin.99 </span>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+{% load static %}
+<div class="container-fluid" style="justify-content:space-between; min-width: 600px">
+  <a class="navbar-brand" href="{% url 'Main' %}"><img style="width: 40px" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQZjU2q9kF7nhG3wLd9WgGErO1iY9aHgs3-Qg&usqp=CAU">   𝒾𝓃𝓈𝓉𝒶ℊ𝓇𝒶𝓂</a>
+  <input class="form-control me-2" style="width: 300px;" type="search" placeholder="Search" aria-label="Search">
+  <div style="display:flex;">
+
+    <span  id="go_home" class="material-icons-outlined" style="padding-right:20px;color:blue;">home</span>
+    <span  id="add_send" class="material-icons-outlined" style="padding-right:20px;color:blue;">send</span>
+    <span  id="add_feed" class="material-icons-outlined" style="padding-right:20px;color:blue;">add_box</span>
+    <span  class="material-icons-outlined" style="padding-right:20px;color:blue;">explore</span>
+    <span  class="material-icons-outlined" style="padding-right:20px;color:blue;">favorite_border</span>
+
+    <div class="btn-group">
+        <img type="button" id="profile_img_click_01" data-bs-toggle="dropdown" style="border-radius: 70%" height="25" width="25" src="{% get_media_prefix %}{{ user.profile_image }}">
+
+        <ul class="dropdown-menu" style="left:-180px; background-color:gray;" >
+          <li><a class="dropdown-item" href="{% url 'content:Profile' %}">프로필</a></li>
+          <li><a class="dropdown-item" href="#">나머지</a></li>
+          <li><a class="dropdown-item" href="{% url 'user:LogOut' %}">로그아웃</a></li>
+        </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+    $(document).on("click","#add_feed",function() {
+        $('.modal_overlay').css({
+            display:"flex",
+            background:"red",
+            top: window.pageYOffset + "px",
+        });
+
+        $('.modal_window').css({
+            background: 'white',
+            color:"black"
+        });
+        $(document.body).css({
+            overflow : "hidden"
+        })
+    //    console.log(window.pageYOffset + " 위치"); // 로그 찍기
+    });
+
+    $(document).on("click","#close_modal",function() {
+        window.location.reload()
+    });
+
+<!--    $(document).on("click","#profile_img_click_01",function() {-->
+<!--      $(".right_body").css({-->
+<!--          display:"fixed",-->
+<!--          top:"200px",-->
+<!--      });-->
+<!--    });-->
+
+    $(document).on("click","#go_home",function() {
+      window.location.href="{% url 'Main' %}"
+    });
+</script>

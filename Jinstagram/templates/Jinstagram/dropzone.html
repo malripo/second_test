@@ -1,0 +1,30 @@
+{% load static %}
+<section style="box-sizing:border-box; width: 90%; height: 90%; position:relative; top:30px; left:30px;">
+        <div class="upload-btn-wrapper">
+            <input type="file" id="input_file" multiple="multiple" style="height: 100%;">
+            <button class="upload-btn">파일선택</button>
+        </div>
+        <form name="uploadForm" id="uploadForm" enctype="multipart/form-data" method="post">
+            {% csrf_token %}
+            <div id="dropZone" style="box-sizing:border-box; width: 100%; height: 100%; border-style: solid; border-color: black; ">
+                <div id="fileDragDesc"> 파일을 드래그 해주세요. </div>
+                <table id="fileListTable" style="box-sizing:border-box;"  border="0px">
+                    <tbody id="fileTableTbody" style="box-sizing:border-box;">
+                    </tbody>
+                </table>
+            </div>
+            <div class="feed_name" style="margin: 10px 10px; display: flex; flex-direction: row; align-items:center;">
+                <div class="profile_box">
+                    <img id="input_profile_image" class="profile_img" src="{% get_media_prefix %}{{ user.profile_image }}">
+                </div>
+                <span id="input_user_id" style="padding: 0px 10px;" class="feed_name_txt"> {{ user.nickname }} </span>
+            </div>
+            <div class="mb-3">
+                <textarea id="input_content" class="form-control" id="exampleFormControlTextarea1" rows="2"></textarea>
+            </div>
+        </form>
+        <input id="feed_create_button" type="button" onclick="uploadFile(); return false;" class="btn btn-success" value="공유하기">
+    <script src="{% static 'js/dropzone.js' %}"></script>
+    <link rel="stylesheet", href="{% static 'css/dropzone.css' %}">
+</section>
+

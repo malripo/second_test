@@ -1,0 +1,152 @@
+{% load static %}
+{% for feed in feed_list %}
+    <div class="border feed_box">
+        <div class="feed_name" style="margin: 10px 10px; display:flex; flex-direction:row; align-items:center">
+          <div class="profile_box" style="background: #BDBDBD;">
+<!--              <img class="profile_img" src="{{ feed.profile_image }}">-->
+              <img class="profile_img" src="{% get_media_prefix %}{{ feed.profile_image }}">
+          </div>
+          <div>
+            <span class="feed_name_txt" style="padding: 0px 10px;">{{ feed.nickname }}</span>
+          </div>
+        </div>
+        <div><img class="feed_img" src="{% get_media_prefix %}{{ feed.image }}"></div>
+        <div class="feed_icon" style="margin: 10px 15px; display:flex; flex-direction:row; justify-content: space-between;">
+          <div>
+            <span id ="favorite_{{ feed.id }}"  feed_id="{{ feed.id }}" class="favorite material-icons-outlined" style="padding-right:20px;color:red;">
+                {% if feed.is_liked %} favorite {% else %} favorite_border {% endif %}
+            </span>
+            <span  style="padding-right:20px;" class="material-icons-outlined">mode_comment</span>
+            <span  style="padding-right:20px;" class="material-icons-outlined">send</span>
+          </div>
+          <div>
+            <span  id="bookmark_{{ feed.id }}" feed_id="{{ feed.id }}" class="bookmark material-icons-outlined" style="padding-right:20px;color:blue;">
+                {% if feed.is_marked %} bookmark {% else %} bookmark_border {% endif %}
+            </span>
+          </div>
+        </div>
+        <div class="feed_like" style="text-align:left ;">
+          <p class="feed_txt"><b>{{ feed.like_count }}</b><b style="color: lightgray; font-size:15px;">명이 좋아합니다</b></p>
+        </div>
+        <div class="feed_content" style="text-align:left ;">
+          <p class="feed_txt"><b>{{ feed.nickname }}</b> {{ feed.content }}</p>
+        </div>
+        <div id="reply_list_{{ feed.id }}"  class="feed_replay" style="text-align:left ;">
+            {% for reply in feed.reply_list %}
+                <span class="feed_txt"><b>{{ reply.nickname }} : </b> {{ reply.reply_content }}</span>
+            {% endfor %}
+        </div>
+
+        <div style="margin: 20px 10px; height:50px; display: flex; fles-direction:row;">
+          <input id="reply_{{feed.id}}" style="width:80%;" type="text" class="form-control" style="width: 300px"  placeholder="댓글달기...." >
+          <button feed_id="{{ feed.id }}" class="upload_reply"  style="margin: 5px;" type="button">
+            댓글
+          </button>
+        </div>
+    </div>
+{% endfor %}
+
+<script>
+    $(".upload_reply").click(function(e){
+        //console.log(e.target.attributes.getNamedItem("feed_id"))
+        var feed_id=e.target.attributes.getNamedItem("feed_id").value
+        var reply_id="reply_" + feed_id
+        // console.log(reply_id)
+        reply_content= $("#" + reply_id).val()
+        // console.log(reply_content)
+        if (reply_content.length <= 0){
+            alert("댓글 입력하세여");
+            return 0;
+        }
+        UploadReply(feed_id,reply_content)
+    });
+
+    function UploadReply(feed_id,reply_content){
+        var feed_id =feed_id;
+        var reply_content = reply_content;
+
+        $.ajax({
+            url: "/content/reply/",
+            data: { feed_id : feed_id,
+                    reply_content : reply_content
+                   },
+            method: "POST",
+            success: function (data) {
+                console.log("성공");
+                $("#reply_list_" + feed_id).append("<span class='feed_txt'><b>{{ user.nickname }} : </b>" + reply_content + "</span>");
+                $("#reply_" + feed_id).val('');
+            },
+            error: function (request, status, error) {
+                console.log(error + "  에러");
+            },
+            complete: function () {
+                console.log("완료");
+                $("#reply_" + feed_id).val('');
+            }
+        });
+    }
+
+    $(".favorite").click(function (event) {
+        var feed_id = event.target.attributes.getNamedItem('feed_id').value;
+        var favorite_id = event.target.id;
+        // console.log(favorite_id);
+        var favorite_text = $.trim($('#' + favorite_id).html());
+        // console.log(favorite_text);
+        if (favorite_text == 'favorite') {
+            $('#' + favorite_id).html('favorite_border');
+        } else {
+            $('#' + favorite_id).html('favorite');
+        }
+
+        $.ajax({
+            url: "/content/like/",
+            data: {
+                feed_id: feed_id,
+                favorite_text: favorite_text
+            },
+            method: "POST",
+            success: function (data) {
+                console.log("성공");
+            },
+            error: function (request, status, error) {
+                console.log("에러");
+            },
+            complete: function () {
+                console.log("완료");
+            }
+        });
+    });
+
+    $(".bookmark").click(function (event) {
+        var feed_id = event.target.attributes.getNamedItem('feed_id').value;
+        var bookmark_id = event.target.id;
+        var bookmark_text = $.trim($('#' + bookmark_id).html());
+        if (bookmark_text == 'bookmark') {
+            $('#' + bookmark_id).html('bookmark_border');
+        } else {
+            $('#' + bookmark_id).html('bookmark');
+        }
+
+        console.log(feed_id);
+        console.log(bookmark_text);
+
+        $.ajax({
+            url: "/content/bookmark/",
+            data: {
+                feed_id: feed_id,
+                bookmark_text: bookmark_text
+            },
+            method: "POST",
+            success: function (data) {
+                console.log("성공");
+            },
+            error: function (request, status, error) {
+                console.log("에러");
+            },
+            complete: function () {
+                console.log("완료");
+            }
+        });
+    });
+</script>
+
