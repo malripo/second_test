@@ -46,7 +46,7 @@ class Main(APIView):
                                   ))
 
         user = User.objects.filter(email=email).first()
-        return render(request, "jinstagram/main.html", context=dict(feed_list=feed_list, user=user))
+        return render(request, "Jinstagram/main.html", context=dict(feed_list=feed_list, user=user))
 
 
 class UploadFeed(APIView):
